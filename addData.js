@@ -7,7 +7,7 @@ var connection = mysql.createConnection(
 	database:'SeProject'
 })
 // SQL commands
-var commandToAddAuthor="INSERT INTO author (author_email,first_name,last_name) VALUES ?"
+var commandToAddAuthor="INSERT INTO author (first_name,last_name,author_email) VALUES ?"
 var insertToPublication =`INSERT INTO publication(user_email,title,date,isbn,impact_factor,type_of_article,volume,name_of_journal,page_number,location_of_conference,article_link,academic_level,doi) VALUES ?`;
 var addDataInContribution = "INSERT INTO contribution (publication_id_latest,author_email) values ?" // mysql code to add in contribution table
 
@@ -35,19 +35,20 @@ var values = arrayOfInputObjects.map(convertToArray);
 
 
 
-var insertToPublication =`INSERT INTO publication(user_email,title,date,isbn,impact_factor,type_of_article,volume,name_of_journal,page_number,location_of_conference,article_link,academic_level,doi) VALUES ?`;
 var publication_id_latest;
 	
 connection.query(insertToPublication,[values],function(err,result){
 		if (err) throw err;
 		console.log("publication query is done");
-	})
-	//extracting the latest publication id
-connection.query("select max(publication_id) from publication",function(err,result,fields)
+		connection.query("select max(publication_id) from publication",function(err,result,fields)
 {
 
 	 publication_id_latest=(result[0]['max(publication_id)'])
+	 console.log("publication_id_latest is extracted")
 })	
+	})
+	//extracting the latest publication id
+
 
 
 // here comes the code to add author
@@ -79,6 +80,22 @@ var arrayToBeAdded =[];
 			connection.query(commandToAddAuthor,[newArray],function(err,result){
 				if(err) throw err;
 				console.log("author added successfully")
+				// the following array is for contribution table
+
+				var arrayToBeQueriedInContribution =[];
+for (let i=0;i<arrayFromWebsite.length;i++)
+{
+	var tempArray = [publication_id_latest,arrayFromWebsite[i].author_email]
+	arrayToBeQueriedInContribution.push(tempArray)
+}
+
+		// this is the query in the contribution query
+
+		connection.query(addDataInContribution,[arrayToBeQueriedInContribution],function(err,result){
+	console.log("contribution query is over");
+})
+
+		
 			})
 		}
 		})
@@ -87,18 +104,11 @@ var arrayToBeAdded =[];
 
 //the following is to add to contribution table
 
-var arrayToBeQueriedInContribution =[];
-for (let i=0;i<arrayFromWebsite.length;i++)
-{
-	var tempArray = [publication_id_latest,arrayFromWebsite[i].author_email]
-	arrayToBeQueriedInContribution.push(tempArray)
-}
+
 
 //adding in the contribution table
 
-connection.query(addDataInContribution,[arrayToBeQueriedInContribution],function(err,result){
-	console.log("contribution query is over");
-})
+
 // contribution query over
 function convertToArray(suppliedObject)
 {

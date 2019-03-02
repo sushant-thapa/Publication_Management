@@ -16,7 +16,7 @@ var arrayToBeSentToWebsite=[]
 var arrayOfAuthorEmails=[];
 var arrayOfAuthorNames=[];
 
-	connection.query(`SELECT publication_id,title,date,doi FROM publication WHERE type_of_article="${type_of_article}"`,function(err,result,field)
+	connection.query(`SELECT * FROM publication WHERE type_of_article="${type_of_article}"`,function(err,result,field)
 	{
 
 		if(err) throw err;
@@ -28,6 +28,14 @@ var arrayOfAuthorNames=[];
 								title:result[i].title,
 								date:result[i].date,
 								doi:result[i].doi,
+								isbn:result[i].isbn,
+								impact_factor:result[i].impact_factor,
+								volume:result[i].volume,
+								name_of_journal:result[i].name_of_journal,
+								page_number:result[i].page_number,
+								location_of_conference:result[i].location_of_conference,
+								article_link:result[i].article_link,
+								academic_level:result[i].academic_level
 								}
 			arrayToBeSentToWebsite.push(tempObject)		
 		}
@@ -59,6 +67,7 @@ var arrayOfAuthorNames=[];
 											arrayOfAuthorEmails[j][k]=tempObject;
 											if(j==arrayOfAuthorEmails.length-1&&k==arrayOfAuthorEmails[j].length-1)
 											{
+
 												console.log(arrayToBeSentToWebsite) // at this point the array is ready to be extracted.
 												console.log(arrayOfAuthorEmails)	// at this point the array is ready to be extracted.
 											}

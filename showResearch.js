@@ -70,7 +70,9 @@ var arrayOfAuthorNames=[];
 
 												console.log(arrayToBeSentToWebsite) // at this point the array is ready to be extracted.
 												console.log(arrayOfAuthorEmails)	// at this point the array is ready to be extracted.
-											}
+													
+											}	
+											
 										})
 
 								}

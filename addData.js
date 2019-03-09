@@ -14,19 +14,19 @@ var valueInContribution=[];
 // the following are sample values. values to be entered in database should be sent as an array of objects
 var arrayOfInputObjects = [{
 	user_email:'Mosby@gmail.com',
-	title:'Neon Tomorrow',
-	date:'2010-12-12',
+	title:'New Tester for Sobit',
+	date:'2018-12-12',
 	isbn:12232,
 	impact_factor:2,
 	type_of_article:'academic',
 	volume:'first',
-	name_of_journal:'Zerone',
-	page_number:'12-23',
-	location_of_conference:'Zimbawe',
+	name_of_journal:'Zerone-Scholar',
+	page_number:'123',
+	location_of_conference:'Nambia',
 	article_link:'google.com',
-	academic_level:'Amateur',
+	academic_level:'Professional',
 	doi:'this_is_doi',
-	authors:[{first_name:"Cena",last_name:"John",author_email:"johncena@gmail.com"},
+	authors:[{first_name:"Hogan",last_name:"John",author_email:"HoganIsthebest@gmail.com"},
 			{first_name:"Sushant",last_name:"Thapa",author_email:"thapa.sushant.ts@gmail.com"}]
 	 }]
 var arrayFromWebsite=arrayOfInputObjects[0].authors;

@@ -3,7 +3,7 @@
 
 //the following helps to select the type of article
 
-var type_of_article = "research";
+var type_of_article = "academic";
 var mysql = require('mysql');
 var connection = mysql.createConnection({
 		host:'localhost',
@@ -11,6 +11,7 @@ var connection = mysql.createConnection({
 		password:'password',
 		database:'SeProject'
 })
+
 
 var arrayToBeSentToWebsite=[]
 var arrayOfAuthorEmails=[];

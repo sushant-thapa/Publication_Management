@@ -4,7 +4,7 @@
 //the following helps to select the type of article
 
 var type_of_article = "academic";
-var mysql = require('mysql');
+var mysql=  require('mysql');
 var connection = mysql.createConnection({
 		host:'localhost',
 		user:'username',

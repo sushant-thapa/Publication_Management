@@ -1,0 +1,11 @@
+body{
+  background: #f1f1f1;
+  padding-top: 100px;
+}
+
+.navBar{
+  padding: 10px;
+  background: #f88379;
+  color: white;
+  font-weight: bold;
+}

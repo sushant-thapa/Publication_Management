@@ -1,0 +1,110 @@
+API REFERENCES FOR "PROJECT ON PUBLICATION LIST MANAGEMENT"
+
+1.
+	endpoint: localhost:3001/addNewPublication
+	
+	required variables: json:
+	{
+		user_email: string,
+	    title: string,
+	    date: string,
+		isbn: integer,
+		impact_factor: integer,
+		type_of_article: string,
+		volume: string,
+		name_of_journal: string,
+		page_number: string,
+		location_of_conference: string,
+		article_link: string
+		academic_level: string,
+		doi: string,
+		authors: [
+			{
+				first_name: string,
+				last_name: string,
+				email: string
+			},
+			{ 
+				first_name: string, 
+				last_name: string,
+				email: string 
+			}
+		    ]	
+	}
+	
+	returns: none
+
+2.
+	endpoint: localhost:3001/deletePublication
+	
+	required variables:
+		title : string
+	
+	returns: none
+
+3.
+	endpoint: localhost:3001/list
+	
+	required variables:
+		type_of_article: string
+
+	returns: 2 arrays:
+		
+		1st array:(array of json)		
+		[
+			{ 
+					publication_id: integer,
+	    			title: string,
+					date: string,
+	    			doi: string,
+	    			isbn: integer,
+	    			impact_factor: integer,
+	    			volume: string,
+	    			name_of_journal: string,
+	    			page_number: string,
+	    			location_of_conference: string,
+	    			article_link: string,
+	    			academic_level: string 
+			},
+	 		{
+				publication_id: integer,
+	    			title: string,
+				date: string,
+	    			doi: string,
+	    			isbn: integer,
+	    			impact_factor: integer,
+	    			volume: string,
+	    			name_of_journal: string,
+	    			page_number: string,
+	    			location_of_conference: string,
+	    			article_link: string,
+	    			academic_level: string 
+			} 
+		]
+
+		2nd array:(array of array of json)
+		[
+			[ 
+				{ 
+					first_name: string, 
+					last_name: string 
+				},
+		    		{ 
+					first_name: string, 
+					last_name: string 
+				}
+			],
+	  		[
+				{ 
+					first_name: string,
+					last_name: string 
+				},
+		    		{ 
+					first_name: string, 
+					last_name: string 
+				} 
+			] 
+		]
+
+
+

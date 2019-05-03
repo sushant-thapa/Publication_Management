@@ -3,7 +3,8 @@ API REFERENCES FOR "PROJECT ON PUBLICATION LIST MANAGEMENT"
 1.
 	endpoint: localhost:3001/addNewPublication
 	
-	required variables: json:
+	//required json file can have any number of fields
+	required variables: json:		//due to the use of nonrelational database, json file may have different attributes
 	{
 		user_email: string,
 	    title: string,
@@ -48,9 +49,9 @@ API REFERENCES FOR "PROJECT ON PUBLICATION LIST MANAGEMENT"
 	required variables:
 		type_of_article: string
 
-	returns: 1 array:
+	returns:array of json	//attributes of json in returned array depends on the attributes used while adding new publications
 		
-		1st array:(array of json)		
+				
 		[
 			{
 				user_email: string,
@@ -114,7 +115,7 @@ API REFERENCES FOR "PROJECT ON PUBLICATION LIST MANAGEMENT"
 	required variables:
 		title : string
 
-	returns: json:
+	returns: json:		//attributes of json depend on the attributes used while adding new publications
 	{
 		user_email: string,
 	    title: string,

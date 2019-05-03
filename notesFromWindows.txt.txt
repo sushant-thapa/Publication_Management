@@ -1,0 +1,3 @@
+Following are notes I added to be careful in windows while installing in other systems.
+
+1. Make sure mysql modules are included in the project

@@ -1,0 +1,12 @@
+select{
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-top: 0px;
+}
+.second{
+    text-align: right;
+    padding: 10px;
+}

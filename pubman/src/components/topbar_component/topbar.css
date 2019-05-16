@@ -1,0 +1,10 @@
+.root{
+    padding: 10px;
+    background: #0071bd;
+    color: white;
+    font-weight: bold;
+    box-shadow: black 0 0 10px;
+    display: flex;
+    align-content: center;
+    height: 120px;
+}

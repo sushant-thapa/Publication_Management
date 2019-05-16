@@ -1,0 +1,23 @@
+/* 
+    This is styling page for the addnewpage component.
+*/
+.selector{
+    background: red;
+    /* margin: 100px; */
+}
+.types_ul{
+    list-style: none;
+    height: 80px;
+    margin-bottom: 60px;
+}
+.types_ul li{
+    padding: 10px;
+    float: left;
+    margin-left : 10px;
+}
+
+.category_paper{
+    overflow-y: hidden;
+    align-content: center;
+    align-items: center;
+}

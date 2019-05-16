@@ -1,0 +1,23 @@
+---------------
+* Sync between table components, so that change in one is reflected in another.
+* Please refresh the page
+* Confirmation dialog box for deleting an existing entry in the table.
+* Complete the profile box for the user, and setup a setup thing **
+* Add more types of publications for the combinedjs component
+* Sort items in table by date, set a fixed date format for the entry table. ( where necessary )
+* Things to be added as item types:
+    - Journal
+    - Book
+    - Chapter of Book
+    - Proceeding
+    - Article
+    - Report
+* Find a method to bundle the application along with mysql ( electron, maybe? )
+    - App needs to work in a single installation file
+    - Application needs two services in the background, using REST API to communicate between the two servers.
+* Complete database schema ( maybe make a single table or create multiple tables )
+* Complete the PDF Cut off, alignment, and numbering problems in pdf creator
+
+Proposals:
+    - Create a single entry button for all things.
+    - 

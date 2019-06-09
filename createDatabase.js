@@ -4,8 +4,9 @@ var databaseCreation ="CREATE DATABASE SeProject";
 var con = mysql.createConnection(
 {
 	host:"localhost",
-	user:"username",
+	user:"user",
 	password:"password",
+	insecureAuth:true,
 	})
 con.connect(function(err)
 {

@@ -1,35 +1,59 @@
 var mysql = require('mysql'); // anallgous to #include in c/c++;
-
-// following are the list of sql commands for various table creation properties;
-var commandCreatePublicationTable= "CREATE TABLE publication (publication_id INT AUTO_INCREMENT PRIMARY KEY,user_email VARCHAR(255), title VARCHAR(255), date DATE, isbn INT,impact_factor FLOAT,type_of_article VARCHAR(255),volume VARCHAR(255),name_of_journal VARCHAR(255),page_number VARCHAR(255),location_of_conference VARCHAR(255),article_link VARCHAR(255),academic_level VARCHAR(255),doi VARCHAR(255))";
-var commandCreateAuthorTable="CREATE TABLE author(author_email VARCHAR(255) PRIMARY KEY,first_name VARCHAR(255),last_name VARCHAR(255))"; // correct it please
-var commandCreateContributionTable = "CREATE TABLE contribution(publication_id INT, author_email VARCHAR(255),FOREIGN KEY (author_email) REFERENCES author(author_email), FOREIGN KEY (publication_id) REFERENCES publication(publication_id))";
-
-//connecting to the SeProject database;
 var connection  = mysql.createConnection(
 {
 	host:'localhost',
-	user:'username',
+	user:'user',
 	password:'password',
 	database:'SeProject',
 });
 
+// following are the list of sql commands for various table creation properties;
+var commandCreateUserTable ="CREATE TABLE user(user_email VARCHAR(50),first_name TEXT, last_name TEXT,department TEXT,PRIMARY KEY(user_email))"
+var commandCreateAuthorTable="CREATE TABLE author(author_email VARCHAR(50),author_id INT AUTO_INCREMENT,first_name TEXT,last_name TEXT,PRIMARY KEY(author_id))"; 
+var commandCreateContributionTable = "CREATE TABLE contribution(publication_id INT, author_id INT, FOREIGN KEY(author_id) REFERENCES author(author_id),FOREIGN KEY(publication_id) references publication(publication_id))"
+// now for the actual entries
+
+// publication acts as the base class from which the others are derived
+var commandCreatePublicationTable= "CREATE TABLE publication (publication_id INT AUTO_INCREMENT PRIMARY KEY,user_email VARCHAR(50), title TEXT, year INT, impact_factor FLOAT,FOREIGN KEY(user_email) REFERENCES user(user_email))";
+
+var commandCreateReportTable = "CREATE TABLE report (publication_id INT,department TEXT,institute TEXT, report_type TEXT, pages INT, ISSN INT, FOREIGN KEY (publication_id) REFERENCES publication(publication_id))"
+var commandCreateProceedingTable ="CREATE TABLE proceeding (publication_id INT,country TEXT, editor TEXT,conference_publication_name TEXT, month TEXT, page_number TEXT,FOREIGN KEY (publication_id) REFERENCES publication(publication_id))"
+var commandCreateJournalTable = "CREATE TABLE journal (publication_id INT,editor TEXT, volume FLOAT, journal_name TEXT,page_number TEXT, month TEXT, day TEXT,issue TEXT, ISSN int, FOREIGN KEY (publication_id) REFERENCES publication(publication_id))"
+var commandCreateArticleTable = "CREATE TABLE article(publication_id INT,editor TEXT,volume FLOAT,periodical_title TEXT,month TEXT, day TEXT,pages INT,issue TEXT,ISSN INT, FOREIGN KEY (publication_id) REFERENCES publication(publication_id))"
+var commandCreateBookTable = "CREATE TABLE book(publication_id INT,country TEXT,editor TEXT,volume INT,edition INT,ISBN TEXT,Page_number TEXT,Chapter_number INT,Book_author TEXT, FOREIGN KEY (publication_id) REFERENCES publication(publication_id))"
+// following is an array of all the SQL commands
+var tableCommands = [commandCreateUserTable,
+commandCreateAuthorTable,
+commandCreatePublicationTable,
+commandCreateContributionTable,
+
+commandCreateReportTable,
+commandCreateProceedingTable,
+commandCreateJournalTable,
+commandCreateArticleTable,
+commandCreateBookTable]
+
 //checking the connection with the database
-connection.connect(function(err){
+connection.connect(function(err)
+{
 	console.log("connected to the database");
-	connection.query(commandCreatePublicationTable,function(err,result){
-	if (err) throw err;
-	console.log("table publication has been created")
-})
 	
-	connection.query(commandCreateAuthorTable,function(err,result)
+	for(var i=0;i<tableCommands.length;i++)
 	{
-		if (err) throw err;
-		console.log("table author has been created");	
-	})
-	connection.query(commandCreateContributionTable,function(err,result)
-	{
-		if (err) throw err;
-		console.log("table contribution has been created");
-	})
+		myQuery(i);
+	}
 })
+
+function myQuery(index){
+connection.query(tableCommands[index],function(err,result)
+		{
+			if (err) 
+				{
+					throw err;
+					process.exit(1);
+				}
+			console.log("table no "+index+" has been created");
+			if(index == tableCommands.length-1)
+				{process.exit(0)}
+		})
+}

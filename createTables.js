@@ -8,7 +8,7 @@ var connection  = mysql.createConnection(
 });
 
 // following are the list of sql commands for various table creation properties;
-var commandCreateUserTable ="CREATE TABLE user(user_email VARCHAR(50),first_name TEXT, last_name TEXT,department TEXT,PRIMARY KEY(user_email))"
+var commandCreateUserTable ="CREATE TABLE user(user_email VARCHAR(50),first_name TEXT, last_name TEXT,department TEXT,password TEXT, PRIMARY KEY(user_email))"
 var commandCreateAuthorTable="CREATE TABLE author(author_email VARCHAR(50),author_id INT AUTO_INCREMENT,first_name TEXT,last_name TEXT,PRIMARY KEY(author_id))"; 
 var commandCreateContributionTable = "CREATE TABLE contribution(publication_id INT, author_id INT, FOREIGN KEY(author_id) REFERENCES author(author_id),FOREIGN KEY(publication_id) references publication(publication_id))"
 // now for the actual entries

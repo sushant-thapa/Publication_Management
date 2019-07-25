@@ -4,9 +4,10 @@ var connection = mysql.createConnection({
 	user:'user',
 	password:'password'});
 connection.connect(function(err)
-
 {
-	if (err) throw err;
-	connection.query("DROP DATABASE SeProject",function(err,result){console.log("database is deleted")})
-	process.exit(0);
+	connection.query("DROP DATABASE SeProject",function(err,result){
+		console.log("database is deleted")
+		process.exit(0);
+		
+})
 })

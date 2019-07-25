@@ -1,0 +1,34 @@
+The data from the website should be an array with three Javascript objects, the first element of the array should contain data about publication table, the second should contain data about the specific publication type(eg. report, or proceeding etc.) and the third should itself be an array about authors. For eg,
+
+	If we want to enter a data about a report, then the website should pass
+
+websiteArray =[ {
+	user_email:'Mosby@gmail.com',
+	title:'New Tester for Sobit',
+	year:'1996',
+	publisher:':Harper Collins',
+	impact_factor:2,
+	city:'kathmandu',
+	doi:'this_is_doi',
+	ranked:true,
+	rank:'one',
+	volume:'first',
+	type_of_publication:'report'
+	 },
+
+	{
+		department:'Department of Electronics',
+		institute:'Institute of Engineering',
+		report_type:'formal',
+		pages:25,
+		issn:'issn'
+	},
+
+	 [
+		{first_name:"Hogan",last_name:"John",author_email:"HoganIsthebest@gmail.com"},
+		{first_name:"Sushant",last_name:"Thapa",author_email:"thapa.sushant.ts@gmail.com"}
+	]
+	
+]
+
+Also note that, while sending data of specific entry, the field publication_id mentioned in the schema diagram should be left empty and is handled in the backend

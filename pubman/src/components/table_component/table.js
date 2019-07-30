@@ -301,6 +301,7 @@ class DataTable extends React.Component{
                                         <option value = "mla">MLA</option>
                                         <option value = "apa">APA</option>
                                         <option value = "ieee">IEEE</option>
+                                        <option value = "ugc">UGC</option>
                                     </Select>
                                 </td>
                             </tr>
@@ -310,6 +311,8 @@ class DataTable extends React.Component{
                                     <Select native style = {{color: "white"}} onClick = {this.handleDocChange}>
                                         <option value = "pdf">PDF</option>
                                         <option value = "docx">DOCX</option>
+                                        <option value = "html">HTML</option>
+                                        
                                     </Select>
                                 </td>
                             </tr>

@@ -1,3 +1,4 @@
+
 var mysql = require('mysql');
 var connection = mysql.createConnection(
 {
@@ -19,7 +20,7 @@ var valueInContribution=[];
 // let us consider that the values are entered for report 
 var arrayFromWebsite = [{
 	user_email:'thapa.sushant.ts@gmail.com',
-	title:'Neon Lights',
+	title:'Computer bowl',
 	year:1996,
 	publisher:'Harper Collins',
 	impact_factor:2,
@@ -31,18 +32,18 @@ var arrayFromWebsite = [{
 	 },
 
 	 {
-	editor:'Iconics',
-	volume:1,
-	periodical_title:'jpt',
-	month:'November',
-	day:'tuesday',
-	pages:55,
-	issue:"first",
-	issn:'12312'
+	 editor:"a",
+	 volume:1,
+	 periodical_title:"a",
+	 month:"A",
+	 day:"text",
+	 pages:52,
+	 issue:"asdf",
+	 issn:"asdf"
 	},
 	[
-		{author_email:"CMpunk@gmail.com",first_name:"CM",last_name:"Punk"},
-		{author_email:"thapa.sushant.ts@gmail.com",first_name:"Sushant",last_name:"Thapa"}
+		{author_email:"AjayLal@gmail.com",first_name:"Chemsitry",last_name:"Lal"},
+		{author_email:"DayaLal@gmail.com",first_name:"Daya",last_name:"Lal"}
 	]
 	]
 
@@ -66,6 +67,10 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 		console.log("publication query is done");
 
 		var latestTitle = arrayFromWebsite[0].title;
+
+		//
+		// First we have to add data in the publicaion table
+		//
 		connection.query(`SELECT publication_id FROM publication where title = "${latestTitle}"`,function(err,result){ 
 			// this queries fetches the publication_id of the latest inserted publication
 			if(err) throw err;
@@ -75,6 +80,9 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 			specificEntry =[specificEntry];
 			var specificQuery=generateSpecificQuery(arrayFromWebsite);
 			
+			//
+			// Then we have to add it in the specific kind of publication
+			//
 			connection.query(specificQuery,[specificEntry],function(err,result){
 				if(err) throw err;
 				console.log(`information is added in table ${specificKindOfPublication}`);
@@ -94,6 +102,10 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 					// now we have to add only those authors that have not been added previously
 					if(authorToBeAdded.length!=0)
 					{
+
+						//
+						// Then we have to check which authors we need to add in the table
+						//
 					connection.query("INSERT INTO author(author_email,first_name,last_name) values ?",[authorToBeAdded],function(err,result){
 						if(err) throw err;
 						console.log("Authors have been added")
@@ -110,7 +122,9 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 						{
 							arrayOfAuthorEmailsToBeQueried.push(arrayFromWebsite[2][i].author_email);
 						}
-
+						//
+						// Here we insert in the contribution table
+						//
 
 						for(var i = 0;i<arrayOfAuthorEmailsToBeQueried.length;i++)
 						{
@@ -137,14 +151,16 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 							arrayOfAuthorEmailsToBeQueried.push(arrayFromWebsite[2][i].author_email);
 						}
 
-
+						//
+						// Here we insert in the contribution table
+						//
 						for(var i = 0;i<arrayOfAuthorEmailsToBeQueried.length;i++)
 						{
 							generateAuthorIdAndQuery(`select author_id from author where author_email = '${arrayOfAuthorEmailsToBeQueried[i]}'`,arrayOfAuthorEmailsToBeQueried.length,i,PID)
 						}
 					}
 					
-					 // this is the publication_id of the one we just entered
+					 
 
 
 				})
@@ -219,7 +235,9 @@ connection.query(insertToPublication,[publicationEntry],function(err,result){ //
 
 // list of helping functions
 
-function generateAuthorIdAndQuery(query,length,counter,PID) // 
+
+
+function generateAuthorIdAndQuery(query,length,counter,PID) // this function generates an array of AuthorIDs and queries it along with publication id
 	 {
 
 	 	connection.query(query,function(err,result){
@@ -234,7 +252,7 @@ function generateAuthorIdAndQuery(query,length,counter,PID) //
 	 }
 
 
-	  function addInContributionTable(aidArray,PID){
+	  function addInContributionTable(aidArray,PID){ // this is where we send command to query into contribution table
 
 	 	for (let i=0;i<aidArray.length;i++)
 	 	{
@@ -245,7 +263,7 @@ function generateAuthorIdAndQuery(query,length,counter,PID) //
 	 }
 
 
-	function generalQuery(suppliedQuery){
+	function generalQuery(suppliedQuery){  // this funciton is a simple function to query. It can be useful when we have to query a bunch of stuff in a loop
 		connection.query(suppliedQuery,function(err,result){
 			if (err) throw err;
 			console.log("query is done");
